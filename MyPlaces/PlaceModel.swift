@@ -17,7 +17,7 @@ struct Place {
     var restaurantImage: String?
     
     static let restaurantNames = [
-            "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
+            "Burger Heroes", "Kitchen", "Bonsai", "Дастархан"
         ]
     
     static func getPlaces() -> [Place] {
