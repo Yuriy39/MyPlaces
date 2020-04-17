@@ -11,6 +11,8 @@ import UIKit
 class NewPlaceViewController: UITableViewController {
     
     var newPlace: Place?
+    
+    var imageIsChanged = false
 
     @IBOutlet weak var placeImage: UIImageView!
     
@@ -63,6 +65,18 @@ class NewPlaceViewController: UITableViewController {
         }
     }
     
+    func saveNewPlace(){
+        
+        var image:UIImage?
+        if imageIsChanged{
+            image = placeImage.image
+        }else {
+            image = #imageLiteral(resourceName: "imagePlaceholder")
+        }
+        
+        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: image, restaurantImage: nil)
+    }
+    
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -84,9 +98,7 @@ extension NewPlaceViewController: UITextFieldDelegate{
         }
     }
     
-    func saveNewPlace(){
-        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: placeImage.image, restaurantImage: nil)
-    }
+    
     
     
     
@@ -106,6 +118,7 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         placeImage.image = info[.editedImage] as? UIImage
         placeImage.contentMode = .scaleAspectFill
         placeImage.clipsToBounds = true
+        imageIsChanged = true
         dismiss(animated: true)
     }
     
